@@ -5,7 +5,7 @@ import { TodoList } from "../components/TodoList";
 import { useEffect } from "react";
 
 export const TodoContainer = () => {
-  const { todos, removeTodo, addTodo, loadTodos, updateTodo } = useTodo();
+  const { loading, todos, removeTodo, addTodo, loadTodos, updateTodo } = useTodo();
 
   useEffect(() => {
     loadTodos();
@@ -15,7 +15,7 @@ export const TodoContainer = () => {
     <Card>
       <TodoCreateForm onClickAdd={addTodo} />
       <br />
-      <TodoList todos={todos} onRemove={removeTodo} onClickCompleted={updateTodo} />
+      <TodoList loading={loading} todos={todos} onRemove={removeTodo} onClickCompleted={updateTodo} />
     </Card>
   );
 };
