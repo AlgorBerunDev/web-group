@@ -1,10 +1,5 @@
-import { Increment } from "./components/Incerement";
-import { useIncrement } from "./hooks/useIncrement";
-
 function App() {
-  const incrementState = useIncrement(10);
-
-  return <Increment increment={incrementState.increment} onIncrement={incrementState.handleIncrement} />;
+  return <h1>Hello World</h1>;
 }
 
 export default App;
