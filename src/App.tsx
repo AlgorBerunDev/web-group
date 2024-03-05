@@ -5,7 +5,6 @@ function App() {
   return (
     <Flex gap={10} vertical>
       <TodoContainer />
-      <TodoContainer />
     </Flex>
   );
 }
