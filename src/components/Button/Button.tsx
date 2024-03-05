@@ -1,15 +1,10 @@
-import "./Button.css";
-
-interface ButtonProps {
-  type?: "default" | "primary" | "secondary" | "link" | "dashed";
-  onClick?: () => void;
-  children?: React.ReactNode;
-}
+import { ButtonProps } from "./Button.props";
+import { StyledButton } from "./Button.styled";
 
 export const Button: React.FC<ButtonProps> = ({ type = "default", onClick, children }) => {
   return (
-    <button className={`btn btn--${type}`} onClick={onClick}>
+    <StyledButton type={type} onClick={onClick}>
       {children}
-    </button>
+    </StyledButton>
   );
 };

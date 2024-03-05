@@ -8,7 +8,7 @@ export const Increment: React.FC<IncrementProps> = ({ increment, onIncrement }) 
   return (
     <div>
       <h1>Increment: {increment}</h1>
-      <Button type="primary" onClick={onIncrement}>
+      <Button type="link" onClick={onIncrement}>
         Increment 2
       </Button>
     </div>
