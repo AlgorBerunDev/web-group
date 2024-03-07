@@ -1,10 +1,11 @@
 import { Button, Flex, Form, Input } from "antd";
 
 interface TodoCreateFormProps {
+  loading: boolean;
   onClickAdd: ({ id, text }: { id: string; text: string }) => void;
 }
 
-export const TodoCreateForm: React.FC<TodoCreateFormProps> = ({ onClickAdd }) => {
+export const TodoCreateForm: React.FC<TodoCreateFormProps> = ({ loading, onClickAdd }) => {
   return (
     <Form layout="inline" onFinish={onClickAdd}>
       <Flex align="flex-end">
@@ -14,7 +15,9 @@ export const TodoCreateForm: React.FC<TodoCreateFormProps> = ({ onClickAdd }) =>
         <Form.Item name="text">
           <Input placeholder="Input Text" />
         </Form.Item>
-        <Button htmlType="submit">Add Task</Button>
+        <Button htmlType="submit" loading={loading} disabled={loading}>
+          Add Task
+        </Button>
       </Flex>
     </Form>
   );

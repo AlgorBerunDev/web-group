@@ -1,3 +1,14 @@
 {
-  "todos": []
+  "todos": [
+    {
+      "id": "sdgdsg",
+      "text": "gsdgsdg",
+      "completed": false
+    },
+    {
+      "id": "asgasgas",
+      "text": "gasgas",
+      "completed": true
+    }
+  ]
 }

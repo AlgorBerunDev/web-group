@@ -1,21 +1,26 @@
 import { Card } from "antd";
-import { useTodo } from "../hooks/useTodo";
 import { TodoCreateForm } from "../components/TodoCreateForm";
 import { TodoList } from "../components/TodoList";
-import { useEffect } from "react";
+import { useTodo } from "../hooks/useTodo";
 
 export const TodoContainer = () => {
-  const { loading, todos, removeTodo, addTodo, loadTodos, updateTodo } = useTodo();
-
-  useEffect(() => {
-    loadTodos();
-  }, []);
+  const { queryFetchTodos, createTodoMutation, deleteTodoMutation, updateTodoMutation } = useTodo();
 
   return (
     <Card>
-      <TodoCreateForm onClickAdd={addTodo} />
+      {createTodoMutation.isSuccess && <h3>isSuccess</h3>}
+
+      <TodoCreateForm
+        onClickAdd={createTodoMutation.mutate}
+        loading={createTodoMutation.isPending || queryFetchTodos.isFetching}
+      />
       <br />
-      <TodoList loading={loading} todos={todos} onRemove={removeTodo} onClickCompleted={updateTodo} />
+      <TodoList
+        loading={queryFetchTodos.isLoading}
+        todos={queryFetchTodos.data}
+        onRemove={deleteTodoMutation.mutate}
+        onClickCompleted={(id, completed) => updateTodoMutation.mutate({ id, completed })}
+      />
     </Card>
   );
 };

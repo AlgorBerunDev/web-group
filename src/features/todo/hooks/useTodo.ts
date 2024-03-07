@@ -1,35 +1,18 @@
-import { useState } from "react";
-import { Todo } from "../types/Todo";
-import { deleteTodo, fetchTodos, patchTodo, postTodo } from "../services/todoService";
+import { useCreateTodo } from "./useCreateTodo";
+import { useDeleteTodo } from "./useDeleteTodo";
+import { useFetchTodos } from "./useFetchTodos";
+import { useUpdateTodo } from "./useUpdateTodo";
 
 export const useTodo = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
+  const queryFetchTodos = useFetchTodos();
+  const createTodoMutation = useCreateTodo();
+  const deleteTodoMutation = useDeleteTodo();
+  const updateTodoMutation = useUpdateTodo();
 
-  const loadTodos = async () => {
-    setLoading(true);
-    const data = await fetchTodos();
-    setTodos(data);
-    setLoading(false);
+  return {
+    queryFetchTodos,
+    createTodoMutation,
+    deleteTodoMutation,
+    updateTodoMutation,
   };
-
-  const addTodo = async (todo: { id: string; text: string }) => {
-    setLoading(true);
-    await postTodo({ ...todo, completed: false });
-    loadTodos();
-  };
-
-  const removeTodo = async (id: string) => {
-    setLoading(true);
-    await deleteTodo(id);
-    loadTodos();
-  };
-
-  const updateTodo = async (id: string, completed: boolean) => {
-    setLoading(true);
-    await patchTodo(id, { completed });
-    loadTodos();
-  };
-
-  return { loading, todos, addTodo, removeTodo, loadTodos, updateTodo };
 };
